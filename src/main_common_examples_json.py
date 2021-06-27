@@ -1,4 +1,4 @@
-from utils import read_csv, save_data_to_json
+from utils import read_csv, save_data_to_json, save_data_to_yaml
 
 data = read_csv("data.csv")
 
@@ -20,5 +20,6 @@ training_data = {
 }
 
 save_data_to_json(training_data, "nlu.json")
+
 
 
