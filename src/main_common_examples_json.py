@@ -1,4 +1,4 @@
-from utils import read_csv, save_data_to_json, save_data_to_yaml
+from utils import read_csv, save_data_to_json
 
 data = read_csv("data.csv")
 

@@ -49,7 +49,7 @@ def read_yaml(file_path):
         except yaml.YAMLError as err:
             print(err)
 
-def read_csv(file_path):
+def read_csv(file_path, remove_empty=False):
     """
     Reads csv file and returns data in python list format.
     """
@@ -58,7 +58,7 @@ def read_csv(file_path):
         csv_reader = csv.reader(csv_file)
         data = []
         for row in csv_reader:
-            row = [i for i in row if i]
+            row = [i for i in row if i] if remove_empty else row
             data.append(row)
         return data
 
@@ -67,6 +67,22 @@ def read_json(file_path):
 
     with open(os.path.join(DATA_DIRECTORY, file_path), 'r') as json_file:
         return json.load(json_file)
+
+def save_data_to_csv(file_path, data):
+    """
+    Saves python dictionary data to csv file. 
+    """
+
+    create_missing_path_directories(file_path)
+
+    if ".csv" not in file_path:
+        file_path = file_path + ".csv"
+
+    with open(os.path.join(DATA_DIRECTORY, file_path), 'w', newline='') as file:
+        csv_writer = csv.writer(file)
+        csv_writer.writerows(data)
+        print("Data saved to file: " + file_path)
+
         
 def save_data_to_json(data, file_path):
     """
